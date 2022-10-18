@@ -1,26 +1,24 @@
-# heroku-docker-nginx-example
+# Heroku Deployment of the Early Melanoma Detection App
 
-Barebones example of deploying
-[the official nginx Docker image](https://github.com/docker-library/docs/tree/master/nginx)
-to Heroku. Serves an example html file at the root directory.
-
-## Try it now!
-
-Fire up an nginx proxy on [Heroku](https://www.heroku.com/) with a single click:
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+https://app-melanoma.herokuapp.com/
 
 ## Manual deployment
 
-You will need to create a Heroku account and install the Heroku CLI, eg.
-`brew install heroku`.
+- Wrote Application using python and javascript
+- Build Image from Dockerfile
+- Pushed the Image to Heroku Web Service
+
+First, you will need to create a Heroku account and install the Heroku CLI, eg.
+`brew install heroku`. Then
 
 ```
-git clone git@github.com:rjoonas/heroku-docker-nginx-example.git
-cd heroku-docker-nginx-example
-heroku container:login
-heroku create
-heroku container:push web
-heroku container:release web
-heroku open
+0. git clone git@github.com:geoffroybertrand/app-melanome-heroku.git
+1. ln -s $chemin_vers_le_bin_heroku /usr/bin/heroku
+2. heroku login -i  (token API ~/.netrc)
+3. heroku create --app detection_melanome
+4. sudo heroku auth:token
+5. sudo docker login --username=_ --password=${YOUR_TOKEN} registry.heroku.com
+6. sudo docker build -t registry.heroku.com/app-melanoma/web .
+7. sudo docker push registry.heroku.com/app-melanoma/web
+8. heroku container:release web -a app-melanoma
 ```
